@@ -1,0 +1,115 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String                 @id @default(uuid())
+  email        String                 @unique
+  password     String
+  displayName  String?
+  createdAt    DateTime               @default(now())
+  updatedAt    DateTime               @updatedAt
+  progresses   UserWordProgress[]
+  sessions     PracticeSession[]
+  resetTokens  PasswordResetToken[]
+}
+
+model PasswordResetToken {
+  id        String   @id @default(uuid())
+  token     String   @unique
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  expiresAt DateTime
+  used      Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model LexiconSource {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  description String?
+  type        String?
+  createdAt   DateTime @default(now())
+  words       Word[]
+  phrases     Phrase[]
+}
+
+model Word {
+  id             String             @id @default(uuid())
+  text           String             @unique
+  phonetic       String?
+  partOfSpeech   String?
+  translation    String
+  example        String?
+  audioUrl       String?
+  createdAt      DateTime           @default(now())
+  updatedAt      DateTime           @updatedAt
+  source         LexiconSource?     @relation(fields: [sourceId], references: [id])
+  sourceId       String?
+  progresses     UserWordProgress[]
+  practiceItems  PracticeAttempt[]
+}
+
+model Phrase {
+  id           String         @id @default(uuid())
+  text         String         @unique
+  translation  String
+  examples     String[]
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  source       LexiconSource? @relation(fields: [sourceId], references: [id])
+  sourceId     String?
+}
+
+model UserWordProgress {
+  id             String   @id @default(uuid())
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId         String
+  word           Word     @relation(fields: [wordId], references: [id], onDelete: Cascade)
+  wordId         String
+  mastered       Boolean  @default(false)
+  inNotebook     Boolean  @default(false)
+  errorCount     Int      @default(0)
+  lastPracticedAt DateTime?
+
+  @@unique([userId, wordId])
+}
+
+model PracticeSession {
+  id           String           @id @default(uuid())
+  user         User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId       String
+  mode         PracticeMode
+  source       PracticeSource
+  createdAt    DateTime         @default(now())
+  attempts     PracticeAttempt[]
+}
+
+model PracticeAttempt {
+  id            String          @id @default(uuid())
+  session       PracticeSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  sessionId     String
+  word          Word?           @relation(fields: [wordId], references: [id])
+  wordId        String?
+  prompt        String
+  answer        String
+  isCorrect     Boolean
+  mistakeCount  Int             @default(0)
+  hintLevel     Int             @default(0)
+  createdAt     DateTime        @default(now())
+}
+
+enum PracticeMode {
+  CHN_TO_ENG
+  AUDIO_TO_ENG
+}
+
+enum PracticeSource {
+  WORD
+  NOTEBOOK
+}

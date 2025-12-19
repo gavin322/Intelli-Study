@@ -1,0 +1,19 @@
+{
+  "name": "intelli-study",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "postinstall": "husky install",
+    "lint": "npm run lint -w backend && npm run lint -w frontend",
+    "test": "npm run test -w backend && npm run test -w frontend"
+  },
+  "devDependencies": {
+    "husky": "^8.0.3"
+  },
+  "dependencies": {
+    "intelli-study-frontend": "file:frontend"
+  }
+}

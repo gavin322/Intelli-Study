@@ -1,10 +1,11 @@
 import { Controller, Get, Query, UseGuards, Param, ParseUUIDPipe, Body, Patch, Post } from '@nestjs/common';
 import { ApiBearerAuth, ApiQuery, ApiTags } from '@nestjs/swagger';
 
-import { LexiconService } from './lexicon.service';
-import { JwtAuthGuard } from '../common/guards/jwt-auth.guard';
 import { CurrentUser } from '../common/decorators/current-user.decorator';
+import { JwtAuthGuard } from '../common/guards/jwt-auth.guard';
+
 import { UpdateProgressDto } from './dto/update-progress.dto';
+import { LexiconService } from './lexicon.service';
 
 @ApiTags('lexicon')
 @ApiBearerAuth()
