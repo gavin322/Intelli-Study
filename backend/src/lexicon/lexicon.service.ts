@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
+import { Prisma, LexiconSource } from '@prisma/client';
 
 import { PrismaService } from '../prisma/prisma.service';
 
@@ -20,6 +20,7 @@ export class LexiconService {
         id: true,
         name: true,
         description: true,
+        type: true,
         createdAt: true
       }
     });
@@ -35,7 +36,7 @@ export class LexiconService {
       countMap.set(item.sourceId, item._count._all);
     }
 
-    return sources.map((s) => {
+    return sources.map((s: LexiconSource) => {
       const wordCount = countMap.get(s.id) ?? 0;
       const pageCount = pageSize > 0 ? Math.ceil(wordCount / pageSize) : 0;
       return {
@@ -56,7 +57,7 @@ export class LexiconService {
   }) {
     const { page, pageSize, sourceId, onlyUnlearned, userId } = params;
 
-    const where: Prisma.WordWhereInput = {
+    const where = {
       ...(sourceId ? { sourceId } : {}),
       ...(onlyUnlearned && userId
         ? {
@@ -82,7 +83,7 @@ export class LexiconService {
 
   async findPhrases(params: { page: number; pageSize: number; sourceId?: string }) {
     const { page, pageSize, sourceId } = params;
-    const where: Prisma.PhraseWhereInput = sourceId ? { sourceId } : {};
+    const where = sourceId ? { sourceId } : {};
     const [items, total] = await this.prisma.$transaction([
       this.prisma.phrase.findMany({
         where,
@@ -132,7 +133,7 @@ export class LexiconService {
   }
 
   async getLearningStats(userId: string, sourceId?: string) {
-    const whereProgress: Prisma.UserWordProgressWhereInput = {
+    const whereProgress = {
       userId,
       ...(sourceId
         ? {
