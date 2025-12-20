@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import * as argon2 from 'argon2';
+import * as bcrypt from 'bcryptjs';
 
 const prisma = new PrismaClient();
 
@@ -159,7 +159,7 @@ async function main() {
   console.log('✅ Created sample phrases');
 
   // 4. 创建一个测试用户
-  const hashedPassword = await argon2.hash('password123');
+  const hashedPassword = await bcrypt.hash('password123', 10);
   const testUser = await prisma.user.upsert({
     where: { email: 'test@example.com' },
     update: {

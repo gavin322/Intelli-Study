@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
-import * as argon2 from 'argon2';
+import * as bcrypt from 'bcryptjs';
 
 import { UsersService } from '../users/users.service';
 
@@ -22,7 +22,7 @@ export class AuthService {
     if (existing) {
       throw new BadRequestException('邮箱已注册');
     }
-    const password = await argon2.hash(payload.password);
+    const password = await bcrypt.hash(payload.password, 10);
     const user = await this.usersService.create({
       email: payload.email,
       password,
@@ -36,7 +36,7 @@ export class AuthService {
     if (!user) {
       throw new UnauthorizedException('账号或密码错误');
     }
-    const isValid = await argon2.verify(user.password, payload.password);
+    const isValid = await bcrypt.compare(payload.password, user.password);
     if (!isValid) {
       throw new UnauthorizedException('账号或密码错误');
     }
