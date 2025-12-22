@@ -846,16 +846,24 @@ const addToNotebook = () => mutateProgress({ mastered: false, inNotebook: true }
   }
   
   .header-actions {
-    flex-direction: column;
-    gap: 12px;
+    flex-direction: row;
+    gap: 8px;
+    align-items: stretch;
   }
   
   .select-wrapper {
-    width: 100%;
+    flex: 1;
+    min-width: 150px;
   }
   
   .source-select {
     width: 100%;
+  }
+  
+  .refresh-btn {
+    flex: 0 0 auto;
+    min-width: 100px;
+    padding: 12px 16px;
   }
   
   .card {

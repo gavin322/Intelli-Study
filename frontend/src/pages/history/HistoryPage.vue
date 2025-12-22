@@ -102,8 +102,8 @@
           class="error-word-card"
         >
           <div class="word-info">
-            <h4 class="word-text">{{ word.word.text }}</h4>
-            <p class="word-translation">{{ word.word.translation }}</p>
+            <h4 class="word-text" :title="word.word.text">{{ word.word.text }}</h4>
+            <p class="word-translation" :title="word.word.translation">{{ word.word.translation }}</p>
           </div>
           <div class="error-info">
             <span class="error-count">
@@ -585,6 +585,8 @@ const reviewWord = (word: any) => {
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 16px;
   margin-top: 24px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .error-word-card {
@@ -598,6 +600,9 @@ const reviewWord = (word: any) => {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   transition: all 0.3s ease;
   border: 2px solid rgba(239, 68, 68, 0.3);
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .error-word-card:hover {
@@ -610,6 +615,7 @@ const reviewWord = (word: any) => {
 .word-info {
   flex: 1;
   min-width: 0;
+  overflow: hidden;
 }
 
 .word-text {
@@ -620,6 +626,9 @@ const reviewWord = (word: any) => {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  cursor: help;
+  max-width: 100%;
+  display: inline-block;
 }
 
 .word-translation {
@@ -629,6 +638,9 @@ const reviewWord = (word: any) => {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  cursor: help;
+  max-width: 100%;
+  display: inline-block;
 }
 
 .error-info {

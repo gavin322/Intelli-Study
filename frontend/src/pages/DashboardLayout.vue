@@ -15,15 +15,6 @@
     
     <!-- 主体内容区 -->
     <div class="main-content">
-      <!-- 主内容 -->
-      <main class="content">
-        <RouterView v-slot="{ Component }">
-          <transition name="page-fade" mode="out-in">
-            <component :is="Component" />
-          </transition>
-        </RouterView>
-      </main>
-      
       <!-- 侧边栏 -->
       <aside class="sidebar">
         <div class="profile" v-if="profile" :class="{ fadeIn: profile }">
@@ -59,6 +50,15 @@
           </RouterLink>
         </nav>
       </aside>
+      
+      <!-- 主内容 -->
+      <main class="content">
+        <RouterView v-slot="{ Component }">
+          <transition name="page-fade" mode="out-in">
+            <component :is="Component" />
+          </transition>
+        </RouterView>
+      </main>
     </div>
   </div>
 </template>
