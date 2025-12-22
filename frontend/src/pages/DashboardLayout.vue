@@ -15,6 +15,15 @@
     
     <!-- 主体内容区 -->
     <div class="main-content">
+      <!-- 主内容 -->
+      <main class="content">
+        <RouterView v-slot="{ Component }">
+          <transition name="page-fade" mode="out-in">
+            <component :is="Component" />
+          </transition>
+        </RouterView>
+      </main>
+      
       <!-- 侧边栏 -->
       <aside class="sidebar">
         <div class="profile" v-if="profile" :class="{ fadeIn: profile }">
@@ -50,15 +59,6 @@
           </RouterLink>
         </nav>
       </aside>
-      
-      <!-- 主内容 -->
-      <main class="content">
-        <RouterView v-slot="{ Component }">
-          <transition name="page-fade" mode="out-in">
-            <component :is="Component" />
-          </transition>
-        </RouterView>
-      </main>
     </div>
   </div>
 </template>
@@ -343,23 +343,22 @@ const handleLogout = () => {
 @media (max-width: 768px) {
   .dashboard-layout {
     flex-direction: column;
+    padding: 8px;
+    gap: 8px;
+  }
+  
+  .main-content {
+    flex-direction: column;
   }
   
   .sidebar {
     width: 100%;
+    height: auto;
     flex-direction: row;
-    gap: 16px;
-    padding: 16px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  }
-  
-  .logo {
-    margin-bottom: 0;
-    padding: 8px 12px;
-  }
-  
-  .logo-text {
-    display: none;
+    gap: 0;
+    padding: 8px;
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+    order: 2;
   }
   
   .profile {
@@ -368,41 +367,20 @@ const handleLogout = () => {
   
   .nav-menu {
     flex-direction: row;
-    overflow-x: auto;
+    justify-content: space-around;
     gap: 8px;
+    overflow-x: hidden;
+    padding: 0;
     flex: 1;
-    padding: 4px 0;
   }
   
   .nav-item {
-    flex-shrink: 0;
-    padding: 12px 16px;
-    min-width: 100px;
+    flex: 1;
+    padding: 10px 8px;
+    min-width: auto;
     justify-content: center;
-  }
-  
-  .nav-text {
-    font-size: 13px;
-  }
-  
-  .content {
-    padding: 16px;
-  }
-}
-
-@media (max-width: 480px) {
-  .sidebar {
-    padding: 12px;
-    gap: 8px;
-  }
-  
-  .nav-menu {
-    gap: 4px;
-  }
-  
-  .nav-item {
-    padding: 10px 12px;
-    min-width: 80px;
+    gap: 6px;
+    border-radius: 8px;
   }
   
   .nav-icon {
@@ -414,7 +392,70 @@ const handleLogout = () => {
   }
   
   .content {
+    padding: 16px;
+    border-radius: 12px;
+    flex: 1;
+    order: 1;
+  }
+  
+  /* 顶部导航栏调整 */
+  .top-nav {
+    padding: 10px 12px;
+    border-radius: 10px;
+  }
+  
+  .app-title {
+    font-size: 16px;
+  }
+  
+  .logout-btn {
+    padding: 6px 10px;
+    gap: 4px;
+  }
+  
+  .logout-text {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-layout {
+    padding: 4px;
+    gap: 4px;
+  }
+  
+  .content {
     padding: 12px;
+    border-radius: 8px;
+  }
+  
+  .sidebar {
+    padding: 6px;
+  }
+  
+  .nav-item {
+    padding: 8px 4px;
+    gap: 4px;
+  }
+  
+  .nav-icon {
+    font-size: 14px;
+  }
+  
+  .nav-text {
+    font-size: 11px;
+  }
+  
+  .top-nav {
+    padding: 8px 10px;
+  }
+  
+  .app-title {
+    font-size: 14px;
+  }
+  
+  .logout-btn {
+    padding: 4px 8px;
   }
 }
 </style>

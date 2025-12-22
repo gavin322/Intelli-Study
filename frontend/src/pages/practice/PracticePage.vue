@@ -1112,20 +1112,42 @@ watch(currentWord, (newWord) => {
 /* 响应式设计 */
 @media (max-width: 768px) {
   .practice-page {
-    padding: 24px;
+    padding: 16px;
     border-radius: 0;
+    background: #f8fafc;
   }
   
   .page-header {
-    margin-bottom: 24px;
+    margin-bottom: 20px;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .header-content {
+    text-align: center;
   }
   
   .page-title {
     font-size: 24px;
+    margin: 0 0 8px 0;
   }
   
   .page-description {
     font-size: 14px;
+    line-height: 1.4;
+  }
+  
+  .header-actions {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .select-wrapper {
+    width: 100%;
+  }
+  
+  .source-select {
+    width: 100%;
   }
   
   .mode-section {
@@ -1140,30 +1162,34 @@ watch(currentWord, (newWord) => {
   }
   
   .practice-card {
-    padding: 24px;
-    border-radius: 20px;
+    padding: 20px;
+    border-radius: 16px;
   }
   
   .prompt {
     font-size: 24px;
+    margin-bottom: 20px;
   }
   
   .actions {
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
   }
   
   .btn {
     min-width: auto;
+    padding: 14px 20px;
+    font-size: 14px;
   }
   
   .answer-input {
     padding: 14px 20px;
     font-size: 16px;
+    border-radius: 12px;
   }
   
   .card-container {
-    min-height: 300px;
+    min-height: 350px;
   }
   
   .progress-info {
@@ -1171,11 +1197,34 @@ watch(currentWord, (newWord) => {
     flex-direction: column;
     align-items: flex-start;
   }
+  
+  .practice-info {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .group-navigation {
+    margin-top: 12px;
+    padding-top: 12px;
+  }
+  
+  .session-complete {
+    padding: 24px;
+    border-radius: 16px;
+  }
+  
+  .complete-title {
+    font-size: 20px;
+  }
+  
+  .complete-text {
+    font-size: 14px;
+  }
 }
 
 @media (max-width: 480px) {
   .practice-page {
-    padding: 16px;
+    padding: 12px;
   }
   
   .page-title {
@@ -1183,8 +1232,8 @@ watch(currentWord, (newWord) => {
   }
   
   .practice-card {
-    padding: 20px;
-    border-radius: 16px;
+    padding: 16px;
+    border-radius: 12px;
   }
   
   .prompt {
@@ -1213,10 +1262,31 @@ watch(currentWord, (newWord) => {
   
   .session-complete {
     padding: 20px;
+    border-radius: 12px;
   }
   
   .complete-title {
-    font-size: 20px;
+    font-size: 18px;
+  }
+  
+  .complete-text {
+    font-size: 13px;
+  }
+  
+  .empty-state {
+    padding: 48px 24px;
+  }
+  
+  .empty-icon {
+    font-size: 48px;
+  }
+  
+  .empty-title {
+    font-size: 18px;
+  }
+  
+  .empty-description {
+    font-size: 13px;
   }
 }
 </style>

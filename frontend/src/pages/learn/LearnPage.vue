@@ -820,68 +820,42 @@ const addToNotebook = () => mutateProgress({ mastered: false, inNotebook: true }
 /* 响应式设计 */
 @media (max-width: 768px) {
   .learn-page {
-    padding: 24px;
+    padding: 16px;
     border-radius: 0;
+    background: #f8fafc;
   }
   
   .header {
-    margin-bottom: 24px;
+    margin-bottom: 20px;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .header-content {
+    text-align: center;
   }
   
   .page-title {
     font-size: 24px;
+    margin: 0 0 8px 0;
   }
   
   .page-description {
     font-size: 14px;
+    line-height: 1.4;
   }
   
-  .card {
-    padding: 24px;
-    border-radius: 20px;
-  }
-  
-  .word-text {
-    font-size: 30px;
-  }
-  
-  .card-header {
+  .header-actions {
     flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
+    gap: 12px;
   }
   
-  .pronunciation-btn {
+  .select-wrapper {
     width: 100%;
-    justify-content: center;
   }
   
-  .actions {
-    flex-direction: column;
-    gap: 12px;
-  }
-  
-  .btn {
-    min-width: auto;
-  }
-  
-  .card-container {
-    min-height: 300px;
-  }
-  
-  .pagination {
-    padding: 16px 0;
-    gap: 12px;
-  }
-}
-
-@media (max-width: 480px) {
-  .learn-page {
-    padding: 16px;
-  }
-  
-  .page-title {
-    font-size: 20px;
+  .source-select {
+    width: 100%;
   }
   
   .card {
@@ -890,7 +864,39 @@ const addToNotebook = () => mutateProgress({ mastered: false, inNotebook: true }
   }
   
   .word-text {
-    font-size: 24px;
+    font-size: 28px;
+  }
+  
+  .card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  
+  .pronunciation-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 12px 20px;
+  }
+  
+  .actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .btn {
+    min-width: auto;
+    padding: 14px 20px;
+    font-size: 14px;
+  }
+  
+  .card-container {
+    min-height: 350px;
+  }
+  
+  .pagination {
+    padding: 16px 0;
+    gap: 12px;
   }
   
   .translation {
@@ -901,13 +907,48 @@ const addToNotebook = () => mutateProgress({ mastered: false, inNotebook: true }
     font-size: 14px;
     padding: 12px;
   }
+}
+
+@media (max-width: 480px) {
+  .learn-page {
+    padding: 12px;
+  }
   
-  .pagination {
-    gap: 8px;
+  .page-title {
+    font-size: 20px;
+  }
+  
+  .card {
+    padding: 16px;
+    border-radius: 12px;
+  }
+  
+  .word-text {
+    font-size: 24px;
   }
   
   .btn {
     padding: 12px 16px;
+    font-size: 13px;
+  }
+  
+  .translation {
+    font-size: 16px;
+  }
+  
+  .empty-state {
+    padding: 48px 24px;
+  }
+  
+  .empty-icon {
+    font-size: 48px;
+  }
+  
+  .empty-text {
+    font-size: 18px;
+  }
+  
+  .empty-subtext {
     font-size: 13px;
   }
 }
