@@ -5,6 +5,7 @@ export default defineConfig({
   plugins: [vue()],
   server: {
     port: 5174,
+    allowedHosts: ['intelli-study.art', 'localhost', '127.0.0.1'],
     proxy: {
       '/api': {
         target: 'http://101.34.227.122:3000',
